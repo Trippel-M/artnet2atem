@@ -1,6 +1,9 @@
 # Artnet to ATEM
 
-Installation on OSX:
+2015 (c) William Viker, Trippel-M levende bilder AS
+
+## Installation
+### Mac OSX
 
 1. Download and install Node.JS from https://nodejs.org/
 2. Open the "Terminal" application
