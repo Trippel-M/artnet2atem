@@ -11,6 +11,7 @@
   "dependencies": {
     "applest-atem": "^0.1.4",
     "artnet-node": "^0.1.0",
+    "config": "^1.17.1",
     "debug": "^2.2.0",
     "dialog": "^0.1.8",
     "electron-builder": "^2.3.0",

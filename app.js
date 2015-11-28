@@ -1,10 +1,5 @@
 // CONFIGURATION
 
-var atemIP = "10.20.30.101";
-var dmxChannel  = 1;
-var dmxUniverse = 0;
-var dmxPhysical = 1;
-
 //
 // DONT CHANGE ANYTHING BELOW THIS LINE
 //
@@ -13,6 +8,7 @@ var debug = require("debug")("main");
 var ATEM = require('applest-atem');
 var atem = new ATEM();
 var artnetsrv = require('artnet-node/lib/artnet_server.js');
+var config = require('config');
 var dialog = require('dialog');
 var http = require('http');
 var fs = require('fs');
@@ -29,6 +25,13 @@ var connected = 0;
 var lastOut1 = 0;
 var lastOut2 = 0;
 var lastOut3 = 0;
+
+
+atemIP = config.get("atem.ip");
+dmxChannel = config.get("dmx.channel");
+dmxUniverse = config.get("dmx.universe");
+dmxPhysical = config.get("dmx.physical");
+
 
 dmxChannel--;
 

@@ -12,7 +12,7 @@
   * git clone git@github.com:willosof/artnet2atem.git
   * cd artnet2atem
   * npm install
-5. Inside the artnet2atem folder there is a file named app.js, open this with a text editor and change the values in the configuration section.
+5. Inside the artnet2atem/config folder there is a file named default.json, open this with a text editor and change the values to suit your needs.
 6. To start the application, go back to Terminal, and type:
   * ./start.sh
 7. Open browser (chrome, safari, firefox), and URL http://127.0.0.1:3000/ to preview incoming artnet data
