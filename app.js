@@ -1,3 +1,14 @@
+// CONFIGURATION
+
+var atemIP = "10.20.30.101";
+var dmxChannel  = 1;
+var dmxUniverse = 0;
+var dmxPhysical = 1;
+
+//
+// DONT CHANGE ANYTHING BELOW THIS LINE
+//
+
 var debug = require("debug")("main");
 var ATEM = require('applest-atem');
 var atem = new ATEM();
@@ -11,11 +22,6 @@ var io = require('socket.io')(http);
 var serveStatic = require('serve-static');
 var EventEmitter = require("events").EventEmitter;
 var system       = new EventEmitter();
-
-var atemIP = "10.20.30.101";
-var dmxChannel  = 1;
-var dmxUniverse = 0;
-var dmxPhysical = 1;
 
 var clientPool = [];
 
@@ -51,7 +57,7 @@ var srv = artnetsrv.listen(6454, function(msg, peer) {
 			//atem.changePreviewInput(msg.data[dmxChannel+0]);
 			//atem.autoTransition();
 		}
-		
+
 	}
 
 	if (msg.universe == dmxUniverse && msg.physical == dmxPhysical && connected) {
