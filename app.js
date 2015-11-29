@@ -1,44 +1,45 @@
-// CONFIGURATION
+/*
+	Artnet to ATEM daemon
 
-//
-// DONT CHANGE ANYTHING BELOW THIS LINE
-//
+	Author:
+		Trippel-M levende bilder AS
+		William Viker
+		william@trippelm.no
 
-var debug = require("debug")("main");
-var ATEM = require('applest-atem');
-var atem = new ATEM();
-var artnetsrv = require('artnet-node/lib/artnet_server.js');
-var config = require('config');
-var dialog = require('dialog');
-var http = require('http');
-var fs = require('fs');
-var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var serveStatic = require('serve-static');
-var EventEmitter = require("events").EventEmitter;
-var system       = new EventEmitter();
+*/
+
+var debug					= require("debug")("main");
+var ATEM					= require('applest-atem');
+var atem					= new ATEM();
+var artnetsrv			= require('artnet-node/lib/artnet_server.js');
+var config				= require('config');
+var dialog				= require('dialog');
+var http 					= require('http');
+var fs 						= require('fs');
+var app 					= require('express')();
+var http 					= require('http').Server(app);
+var io 						= require('socket.io')(http);
+var serveStatic 	= require('serve-static');
+var EventEmitter	= require("events").EventEmitter;
+var system				= new EventEmitter();
 
 var clientPool = [];
-
 var connected = 0;
+
 var lastOut1 = 0;
 var lastOut2 = 0;
 var lastOut3 = 0;
 
+atemIP				= config.get("atem.ip");
+dmxChannel		= config.get("dmx.channel");
+dmxUniverse		= config.get("dmx.universe");
+dmxPhysical		= config.get("dmx.physical");
 
-atemIP = config.get("atem.ip");
-dmxChannel = config.get("dmx.channel");
-dmxUniverse = config.get("dmx.universe");
-dmxPhysical = config.get("dmx.physical");
-
-
-dmxChannel--;
-
-debug("Starting artnet2atem");
+dmxChannel--; //h4x
 
 debug("atemConnect", "Connecting to ATEM");
-atem.connect('10.20.30.101');
+
+atem.connect(atemIP);
 
 atem.on('connect', function() {
 	debug("atemConnect", "ATEM Connected");
@@ -52,6 +53,7 @@ var srv = artnetsrv.listen(6454, function(msg, peer) {
 		debug("ArtNet", "Sequence "+msg.sequence+" Physical "+msg.physical+" Universe "+msg.universe+" Length "+msg.length);
 	}
 
+	// First channel - PGM switching
 	if (msg.universe == dmxUniverse && msg.physical == dmxPhysical && connected) {
 		if (lastOut1 != msg.data[0]) {
 			lastOut1 = msg.data[dmxChannel+0];
@@ -60,9 +62,9 @@ var srv = artnetsrv.listen(6454, function(msg, peer) {
 			//atem.changePreviewInput(msg.data[dmxChannel+0]);
 			//atem.autoTransition();
 		}
-
 	}
 
+	// AUX1 switching
 	if (msg.universe == dmxUniverse && msg.physical == dmxPhysical && connected) {
 		if (lastOut2 != msg.data[dmxChannel+1]) {
 			lastOut2 = msg.data[dmxChannel+1];
@@ -71,6 +73,7 @@ var srv = artnetsrv.listen(6454, function(msg, peer) {
 		}
 	}
 
+	// AUX2 switching
 	if (msg.universe == dmxUniverse && msg.physical == dmxPhysical && connected) {
 		if (lastOut3 != msg.data[dmxChannel+2]) {
 			lastOut3 = msg.data[dmxChannel+2];
@@ -81,10 +84,8 @@ var srv = artnetsrv.listen(6454, function(msg, peer) {
 
 });
 
-atem.on('stateChanged', function(err, state) { var connected = 0; });
-
 atem.on('stateChanged', function(err, state) {
-	//  debug("stateChanged", state); // catch the ATEM state.
+	var connected = 0;
 });
 
 app.get('/', function(req, res){
@@ -108,10 +109,6 @@ io.on('connection', function(socket){
 
 	system.on("artnet",function(data) {
 		socket.emit("artnet",data);
-	});
-
-	socket.on('chat message', function(msg){
-		console.log('message: ' + msg);
 	});
 
 	socket.on('disconnect', function(){
