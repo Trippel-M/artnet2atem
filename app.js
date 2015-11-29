@@ -23,7 +23,6 @@ var serveStatic 	= require('serve-static');
 var EventEmitter	= require("events").EventEmitter;
 var system				= new EventEmitter();
 
-var clientPool = [];
 var connected = 0;
 
 var lastOut1 = 0;
@@ -99,13 +98,10 @@ io.on('connection', function(socket){
 app.use(serveStatic(__dirname + '/public'))
 
 http.listen(3000, function(){
-	console.log('listening on *:3000');
+	console.log('Webserver ready at port 3000. http://127.0.0.1:3000/');
 });
 
-
 io.on('connection', function(socket){
-
-	clientPool.push(socket);
 
 	system.on("artnet",function(data) {
 		socket.emit("artnet",data);
