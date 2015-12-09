@@ -1,0 +1,49 @@
+@import 'base/base';
+@import '../../dist/vendor/bootstrap-sass/assets/stylesheets/_bootstrap';
+@import '../../dist/vendor/sbadmin/font-awesome-4.1.0/scss/font-awesome';
+@import 'sb-admin/sb-admin-2';
+@import 'includes/nav';
+@import 'includes/footer';
+
+html, body {
+	width: 100%;
+	height: 100%;
+	background: #FEFEFE;
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+	overflow: hidden;
+}
+
+A,BODY {
+	cursor: default !important;
+}
+A:hover {
+	cursor: default !important;
+}
+
+.loading {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 99999;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	justify-content: center;
+	font-size: 60px;
+	font-family: Verdana;
+}
+#wrapper.wraploading {
+	-webkit-filter: blur(5px);
+}
+#wrapper.doneloading {
+	-webkit-filter: none;
+}

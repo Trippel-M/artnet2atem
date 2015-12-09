@@ -1,0 +1,28 @@
+// Mixins
+#singlejumbotron {
+	padding-top: 5%;
+}
+
+a {
+	color: $brand-logo;
+}
+
+.panel-primary a {
+	color: $brand-primary;
+}
+
+.navbar-header {
+	background-image: url('grafikk.png');
+	background-repeat: no-repeat;
+	background-position: 10px 12px;
+	padding-left: 30px;
+}
+
+.navbar.navbar-static-top {
+	background: darken(#f8f8f8, 5%);
+}
+
+.navbar-default .navbar-brand {
+	color: $brand-logo;
+}
+

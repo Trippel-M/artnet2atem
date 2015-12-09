@@ -1,0 +1,15 @@
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		Oversikt
+	</div>
+	<div class="panel-body" ng-hide="saved">
+		<div class="row">
+			<div class="col-lg-6">
+					ATEM status: <i class="fa text-success" ng-class="{ 'fa-circle': statusOK, 'fa-circle-o': !statusOK }"></i>
+					<br />
+					<input type="checkbox" ng-model="statusOK"> Test
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Home">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<title>ArtNet ATEM Kontroller</title>
+
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- CUSTOM CSS -->
+
+    <link href="../dist/css/style.css" rel="stylesheet" />
+
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+		<div class="loading" ng-hide="loaded">
+			Loading <i class="fa fa-spinner fa-spin"></i>
+		</div>
+		<div id="wrapper" class="wraploading" ng-class=" loaded ? 'doneloading' : '' ">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; -webkit-app-region: drag">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand">Artnet ATEM kontroller</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+						<i class="fa fa-dot-circle-o"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#/config"><i class="fa fa-wrench fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#" quit><i class="fa fa-sign-out fa-fw"></i> Quit</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li ng-repeat="item in menu">
+							<a ng-class="path == item.path ? 'active' : ''" ng-href="#{{item.path}}"><i class="fa fa-fw" ng-class="item.icon"></i> {{item.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper">
+			<div class="container-fluid">
+				<br />
+				<div ng-view></div>
+			</div>
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- REQUIRED -->
+    <script src="../jspm_packages/system.js"></script>
+    <script src="../config.js"></script>
+	<script> window.$ = window.jQuery = require('../dist/vendor/jquery/dist/jquery');</script>
+
+    <!-- bower:js -->
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-mocks/angular-mocks.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
+    <script src="../bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <!-- endbower -->
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/metisMenu.min.js"></script>
+    <script src="../dist/app/home/home.js"></script>
+    <script src="../dist/app/home/routes.js"></script>
+    <script src="../dist/app/home/controllers/config-controller.js"></script>
+    <script src="../dist/app/home/controllers/main-controller.js"></script>
+    <script src="../dist/app/home/controllers/log-controller.js"></script>
+    <script src="../dist/js/sample.js"></script>
+</body>
+
+</html>

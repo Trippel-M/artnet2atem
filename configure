@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo "Enter your sudo passord (current osx user)"
+sudo ./scripts/load_globals.sh 
+npm install
+sudo npm install -g electron-prebuilt
