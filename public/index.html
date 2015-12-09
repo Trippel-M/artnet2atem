@@ -3,10 +3,13 @@
 	 2015 (c) William Viker, Trippel-M levende bilder AS
 	 william@trippelm.no
 -->
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <title>Artnet to ATEM</title>
 
-	<title>Artnet to ATEM</title>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
@@ -80,8 +83,11 @@
 	</script>
 </head>
 <body>
-	<h1>Artnet to ATEM: Live Universe Overview</h1>
-	<table id="universes">
-	</table>
+	<div class="container">
+		<div class="jumbotron">
+			<h1>Artnet to ATEM: Live Universe Overview</h1>
+			<table id="universes"></table>
+		</div>
+	</div>
 </body>
 </html>

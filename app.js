@@ -92,13 +92,13 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-	debug("web",'a user connected');
+	debug("web",'New client connected');
 });
 
 app.use(serveStatic(__dirname + '/public'))
 
 http.listen(3000, function(){
-	console.log('Webserver ready at port 3000. http://127.0.0.1:3000/');
+	debug("web",'Webserver ready at port 3000. http://127.0.0.1:3000/');
 });
 
 io.on('connection', function(socket){
