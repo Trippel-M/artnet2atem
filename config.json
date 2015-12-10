@@ -1,6 +1,1 @@
-{
-  "ip":"127.0.0.1",
-  "artnet_ip":"10.20.30.100",
-  "artnet_uni":"1",
-  "artnet_start":"0"
-}
+{"atem_ip":"2.0.0.3","our_ip":"2.0.0.2","artnet_uni":"1","artnet_start":"0"}

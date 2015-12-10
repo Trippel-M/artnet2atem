@@ -9,13 +9,20 @@ var path = require('path');
 var BrowserWindow = require('browser-window');
 var externalWindow;
 
+
+
+var debug					= require("debug")("main");
+var ATEM					= require('applest-atem');
+var atem					= new ATEM();
+var artnetsrv			= require('artnet-node/lib/artnet_server.js');
+var config				= require('config');
+var dialog				= require('dialog');
+var http 					= require('http');
+var fs 						= require('fs');
+
 app.commandLine.appendSwitch('remote-debugging-port', '8315');
 app.commandLine.appendSwitch('host-rules', 'MAP * 127.0.0.1');
 
-// ####################################################
-// ####################################################
-
-// Report crashes to our server.
 require('crash-reporter').start();
 
 var mainWindow = null;

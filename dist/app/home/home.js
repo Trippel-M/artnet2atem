@@ -3,6 +3,7 @@
 	var menu = require(__dirname + '/../menu.js');
 
   angular.module('Home', ['ngRoute']).
+
 	run(['$rootScope', function($rootScope) {
 			$rootScope.menu = menu;
 			$rootScope.path = '#/';
@@ -11,7 +12,9 @@
 			});
 			$rootScope.loaded = true;
 	}])
+
 		.directive('back', ['$window', function($window) {
+
         return {
             restrict: 'A',
             link: function (scope, elem, attrs) {
@@ -20,8 +23,11 @@
                 });
             }
         };
+
     }])
+    
 		.directive('quit', [function() {
+
         return {
             restrict: 'A',
             link: function (scope, elem, attrs) {
@@ -31,5 +37,6 @@
                 });
             }
         };
+
     }]);
 })();
