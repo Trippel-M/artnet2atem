@@ -12,6 +12,7 @@
 	var lastOut1 = 0;
 	var lastOut2 = 0;
 	var lastOut3 = 0;
+	var lastOut4 = 0;
 
 	system.emit("atem_connected",false);
 
@@ -54,9 +55,16 @@
 
 			system.emit("artnet",msg);
 
+			if (msg.universe == dmxUniverse) {
+				if (msg.data[dmxChannel+0] == 255) msg.data[dmxChannel+0] = 2001; // colorbars at full on pgm
+				if (msg.data[dmxChannel+1] == 255) msg.data[dmxChannel+1] = 2001; // colorbars at full on aux1
+				if (msg.data[dmxChannel+2] == 255) msg.data[dmxChannel+2] = 2001; // colorbars at full on aux2
+				if (msg.data[dmxChannel+3] == 255) msg.data[dmxChannel+3] = 2001; // colorbars at full on aux3
+			}
+
 			// First channel - PGM switching
 			if (msg.universe == dmxUniverse) {
-				if (lastOut1 != msg.data[0]) {
+				if (lastOut1 != msg.data[dmxChannel+0]) {
 					lastOut1 = msg.data[dmxChannel+0];
 					if (connected) atem.changeProgramInput(msg.data[dmxChannel+0]);
 					//system.emit("pgm_input",msg.data[dmxChannel+0]);
@@ -72,7 +80,7 @@
 					lastOut2 = msg.data[dmxChannel+1];
 					console.log("ATEM","Changing AUX 1 to input "+ msg.data[dmxChannel+1]);
 					//system.emit("aux1_input",msg.data[dmxChannel+1]);
-					if (connected) atem.changeAuxInput(1,msg.data[dmxChannel+1]);
+					if (connected) atem.changeAuxInput(0,msg.data[dmxChannel+1]);
 				}
 			}
 
@@ -82,7 +90,17 @@
 					lastOut3 = msg.data[dmxChannel+2];
 					console.log("ATEM","Changing AUX 2 to input "+ msg.data[dmxChannel+2]);
 					//system.emit("aux2_input",msg.data[dmxChannel+2]);
-					if (connected) atem.changeAuxInput(2,msg.data[dmxChannel+2]);
+					if (connected) atem.changeAuxInput(1,msg.data[dmxChannel+2]);
+				}
+			}
+
+			// AUX3 switching
+			if (msg.universe == dmxUniverse) {
+				if (lastOut4 != msg.data[dmxChannel+3]) {
+					lastOut4 = msg.data[dmxChannel+3];
+					console.log("ATEM","Changing AUX 3 to input "+ msg.data[dmxChannel+3]);
+					//system.emit("aux2_input",msg.data[dmxChannel+2]);
+					if (connected) atem.changeAuxInput(2,msg.data[dmxChannel+3]);
 				}
 			}
 
@@ -91,9 +109,9 @@
 
 	atem.on('stateChanged', function(err, state) {
 			system.emit("pgm_input", state.video.programInput);
-			system.emit("aux1_input", state.video.auxs[1]);
-			system.emit("aux2_input", state.video.auxs[2]);
-			system.emit("aux3_input", state.video.auxs[3]);
+			system.emit("aux1_input", state.video.auxs[0]);
+			system.emit("aux2_input", state.video.auxs[1]);
+			system.emit("aux3_input", state.video.auxs[2]);
 	});
 
 
