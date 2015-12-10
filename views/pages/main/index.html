@@ -4,7 +4,7 @@
 		ArtNet Activity
 	</div>
 	<div class="panel-body">
-		Recieved packets <span id="artnetcounter">0</span>
+			Recieved packets <span><div ng-repeat="(key, val) in artnetcounter"><span>{{ key }} <b>{{ val }}</b></span></div></span>
 	</div>
 </div>
 
@@ -13,19 +13,13 @@
 		ATEM Status
 	</div>
 	<div class="panel-body">
-		<span id="atemconnected">Disconnected</span>
+		<span>{{ atemstatus }}</span>
 		<table class="table">
 			<tr>
-				<th>PGM</th>
-				<th>AUX1</th>
-				<th>AUX2</th>
-				<th>AUX3</th>
+					<th ng-repeat="(key, value) in atemio">{{ key }}</th>
 			</tr>
 			<tr>
-				<td id="atem_pgm">?</td>
-				<td id="atem_aux1">?</td>
-				<td id="atem_aux2">?</td>
-				<td id="atem_aux3">?</td>
+					<td ng-repeat="(key, value) in atemio">{{ value }}</td>
 			</tr>
 		</table>
 	</div>

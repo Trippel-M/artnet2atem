@@ -15,7 +15,9 @@
 	var lastOut4 = 0;
 
 //	system.emit("atem_connected",false);
-	system.emit("atem_state","connecting");
+	system.emit("atem_state","Connecting");
+
+	var artnet_server;
 
 	var atemIP;
 	var dmxChannel;
@@ -26,6 +28,8 @@
 		fs.readFile(__dirname + '/../config.json', function (err, data) {
 			var configx = JSON.parse(data);
 			if (!err) {
+				connected = 0;
+				system.emit('atem_state', 'Disconnected');
 				console.log("Config is:", configx);
 				atemIP				= configx.atem_ip;
 				dmxChannel		= configx.artnet_start;
@@ -33,6 +37,12 @@
 				dmxUniverse		= configx.artnet_uni;
 
 				atem.connect(atemIP, 9910);
+
+				if (typeof artnet_server != 'undefined') {
+					artnet_server.close();
+				}
+
+				artnet_server = artnetsrv.Server.listen(6454, configx.our_ip, artnet_data);
 			} else {
 				alert('Klarte ikke lese konfigurasjonsfilen!');
 			}
@@ -41,14 +51,18 @@
 	system.emit("config_updated");
 
 	atem.on('connect', function() {
-		system.emit("atem_state","connected");
-//		system.emit("atem_connected",true);
+		system.emit("atem_state","Connected");
 		connected = 1;
 	});
 	console.log("listening");
 
-	var srv = artnetsrv.Server.listen(6454, function(err, msg, peer) {
+	var artnet_data = function(err, msg, peer) {
 
+		if (err) {
+			console.error(err);
+			alert("ARTNET Error: " + err);
+			return;
+		}
 		if (msg.type != 'ArtOutput') {
 			// not artnet
 		}
@@ -107,15 +121,14 @@
 			}
 
 		}
-	});
+	};
 
 	atem.on('stateChanged', function(err, state) {
 			system.emit("pgm_input", state.video.programInput);
 			system.emit("aux1_input", state.video.auxs[0]);
 			system.emit("aux2_input", state.video.auxs[1]);
 			system.emit("aux3_input", state.video.auxs[2]);
-			system.emit("atem_state","connected");
-
+			system.emit("atem_state","Connected");
 	});
 
 

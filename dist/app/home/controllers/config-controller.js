@@ -6,7 +6,6 @@
 				$scope.saved = false;
 
 				fs.readFile(__dirname + '/../config.json', function (err, data) {
-					console.log("Result reading file:", err, data, JSON.parse(data));
 					if (!err) {
 
 						var jdata = JSON.parse(data);
@@ -17,12 +16,11 @@
 
 					} else {
 							console.error(err);
+							alert(err);
 					}
 				});
 
 				$scope.saveConfig = function () {
-					console.log("Saving: ", $scope.config);
-
 					fs.writeFile(__dirname + '/../config.json', JSON.stringify($scope.config), function (err) {
 						if (err) {
 							console.error(err);
