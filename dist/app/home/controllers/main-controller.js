@@ -41,6 +41,8 @@
 						$scope.atemstatus = state;
 						scope.atemstatus = state;
 				});
+				// Få umiddelbar oppdatering
+				system.emit('get_atem_state');
 
 				var pgm_input;
 				system.on("pgm_input", pgm_input = function(inx) {

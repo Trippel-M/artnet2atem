@@ -23,6 +23,12 @@
 	var dmxChannel;
 	var dmxUniverse;
 
+	system.on('get_atem_state', function () {
+			setImmediate(function () {
+				system.emit('atem_state', connected);
+			});
+	});
+
 
 	system.on("config_updated", function() {
 		fs.readFile(__dirname + '/../config.json', function (err, data) {
