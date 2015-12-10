@@ -22,14 +22,14 @@
 
 				$scope.saveConfig = function () {
 					console.log("Saving: ", $scope.config);
-		
+
 					fs.writeFile(__dirname + '/../config.json', JSON.stringify($scope.config), function (err) {
 						if (err) {
 							console.error(err);
 						} else {
 							$scope.saved = true;
 							$scope.$apply();
-							
+
 							setTimeout(function () {
 								$scope.saved = false;
 								$scope.$apply();
