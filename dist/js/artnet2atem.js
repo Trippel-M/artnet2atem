@@ -1,6 +1,7 @@
 (function(){
 
 
+	var fs            = require('fs');
 	var debug					= require("debug")("main");
 	var ATEM					= require('applest-atem');
 	var atem					= new ATEM();
@@ -20,13 +21,20 @@
 
 
 	system.on("config_updated", function() {
-		var configx	= require('config');
-		atemIP				= configx.atem_ip;
-		dmxChannel		= configx.artnet_start;
-		dmxChannel--;
-		dmxUniverse		= configx.artnet_uni;
-		atem.connect(atemIP, 9910);
+		fs.readFile(__dirname + '/../config.json', function (err, data) {
+			var configx = JSON.parse(data);
+			if (!err) {
+				console.log("Config is:", configx);
+				atemIP				= configx.atem_ip;
+				dmxChannel		= configx.artnet_start;
+				dmxChannel--;
+				dmxUniverse		= configx.artnet_uni;
 
+				atem.connect(atemIP, 9910);
+			} else {
+				alert('Klarte ikke lese konfigurasjonsfilen!');
+			}
+		});
 	});
 	system.emit("config_updated");
 
@@ -51,7 +59,7 @@
 				if (lastOut1 != msg.data[0]) {
 					lastOut1 = msg.data[dmxChannel+0];
 					if (connected) atem.changeProgramInput(msg.data[dmxChannel+0]);
-					system.emit("pgm_input",msg.data[dmxChannel+0]);
+					//system.emit("pgm_input",msg.data[dmxChannel+0]);
 					console.log("ATEM","Changing PGM out to input "+msg.data[dmxChannel+0]);
 					//atem.changePreviewInput(msg.data[dmxChannel+0]);
 					//atem.autoTransition();
@@ -63,7 +71,7 @@
 				if (lastOut2 != msg.data[dmxChannel+1]) {
 					lastOut2 = msg.data[dmxChannel+1];
 					console.log("ATEM","Changing AUX 1 to input "+ msg.data[dmxChannel+1]);
-					system.emit("aux1_input",msg.data[dmxChannel+1]);
+					//system.emit("aux1_input",msg.data[dmxChannel+1]);
 					if (connected) atem.changeAuxInput(1,msg.data[dmxChannel+1]);
 				}
 			}
@@ -73,7 +81,7 @@
 				if (lastOut3 != msg.data[dmxChannel+2]) {
 					lastOut3 = msg.data[dmxChannel+2];
 					console.log("ATEM","Changing AUX 2 to input "+ msg.data[dmxChannel+2]);
-					system.emit("aux2_input",msg.data[dmxChannel+2]);
+					//system.emit("aux2_input",msg.data[dmxChannel+2]);
 					if (connected) atem.changeAuxInput(2,msg.data[dmxChannel+2]);
 				}
 			}
@@ -82,7 +90,10 @@
 	});
 
 	atem.on('stateChanged', function(err, state) {
-		var connected = 0;
+			system.emit("pgm_input", state.video.programInput);
+			system.emit("aux1_input", state.video.auxs[1]);
+			system.emit("aux2_input", state.video.auxs[2]);
+			system.emit("aux3_input", state.video.auxs[3]);
 	});
 
 
