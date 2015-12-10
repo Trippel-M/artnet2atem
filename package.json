@@ -1,7 +1,7 @@
 {
-  "name": "electron-angular-boilerplate",
+  "name": "artnet2atem",
   "version": "1.5.0",
-  "description": "A basic electron app using AngularJS and Skeleton CSS with ES6 support",
+  "description": "Electron artnet2atem",
   "engines": {
     "node": "<0.12"
   },
@@ -15,22 +15,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Stephn-R/Electron-Boilerplate.git"
+    "url": "https://github.com/willosof/artnet2atem.git"
   },
   "keywords": [
-    "electron",
-    "angular",
-    "boilerplate",
-    "desktop",
-    "applications",
-    "web"
+    "artnet",
+    "atem",
+    "electron"
   ],
-  "author": "steprodriguez10@gmail.com",
+  "author": "william@trippelm.no",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Stephn-R/Electron-Boilerplate/issues"
+    "url": "https://github.com/willosof/artnet2atem/issues"
   },
-  "homepage": "https://github.com/Stephn-R/Electron-Boilerplate",
+  "homepage": "https://github.com/willosof/artnet2atem",
   "devDependencies": {
     "babel-core": "^5.6.14",
     "babel-jest": "^5.3.0",
@@ -58,7 +55,7 @@
   },
   "dependencies": {
     "applest-atem": "^0.1.4",
-    "artnet-node": "^0.1.0",
+    "artnet-node": "git://github.com/haakonnessjoen/artnet-node#Discovery",
     "config": "^1.17.1",
     "debug": "^2.2.0",
     "fs": "0.0.2",

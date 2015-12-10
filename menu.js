@@ -10,7 +10,7 @@ module.exports=exports=[
 			path: '/log'
 	},
 	{
-			icons 'fa-file-text-o',
+			icon: 'fa-file-text-o',
 			name: "Fml",
 			path: "/fml"
 	}

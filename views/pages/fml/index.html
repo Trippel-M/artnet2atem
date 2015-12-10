@@ -1,0 +1,58 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    FML FML FML
+  </div>
+  <div class="panel-body" ng-hide="saved">
+    <div class="row">
+
+      <div class="col-lg-6">
+        <form name="configform" role="form" ng-submit="saveConfig()" novalidation>
+
+          <div class="form-group">
+
+            <label>ATEM IP</label>
+
+            <input class="form-control" placeholder="2.0.0.3" ng-model="config.atem_ip" required>
+            <p class="help-block">ATEM bildemikser sin ip</p>
+            </div>
+
+            <div class="form-group">
+              <label>Our IP</label>
+              <input class="form-control" placeholder="2.0.0.2" ng-model="config.our_ip" required>
+              <p class="help-block">IP vi skal lytte på</p>
+            </div>
+
+            <div class="form-group">
+              <label>ArtNet-univers</label>
+              <input class="form-control" placeholder="1" ng-model="config.artnet_uni" required>
+              <p class="help-block">Universnummer for ArtNet</p>
+            </div>
+
+            <div class="form-group">
+              <label>ArtNet-kanal</label>
+              <input class="form-control" placeholder="0" ng-model="config.artnet_start" required>
+              <p class="help-block">Kanalnummer for ATEM styring</p>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-default" back>
+                  <i class="fa fa-arrow-left"></i> Tilbake
+                </button>
+                <button class="btn btn-success" type="submit" ng-show="configform.$valid">
+                  <i class="fa fa-save"></i> Lagre
+                </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body" ng-show="saved">
+      <div class="panel-body" ng-show="saved">
+        <div class="row">
+          <div class="col-lg-6"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
