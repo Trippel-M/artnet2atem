@@ -83,6 +83,7 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow( {
       width: 800,
       height: 600,
+      title: "artnet2atem",
       frame: false,
       minWidth: 768,
       minHeight: 460
