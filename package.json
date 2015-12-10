@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/willosof/artnet2atem.git"
+    "url": "https://github.com/Trippel-M/artnet2atem.git"
   },
   "keywords": [
     "artnet",
@@ -25,9 +25,9 @@
   "author": "william@trippelm.no",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/willosof/artnet2atem/issues"
+    "url": "https://github.com/Trippel-M/artnet2atem/issues"
   },
-  "homepage": "https://github.com/willosof/artnet2atem",
+  "homepage": "https://github.com/Trippel-M/artnet2atem",
   "devDependencies": {
     "babel-core": "^5.6.14",
     "babel-jest": "^5.3.0",

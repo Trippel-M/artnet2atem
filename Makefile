@@ -21,7 +21,7 @@ mac-64:
 	mv ${OUTPUT_DIR}/mac64/app-darwin-x64/app.app ${OUTPUT_DIR}/mac64/app-darwin-x64/app/artnet2atem.app
 	cp ${OUTPUT_DIR}/../tpmlogo.icns ${OUTPUT_DIR}/mac64/app-darwin-x64/app/artnet2atem.app/Contents/Resources/atom.icns
 	#perl -i -pe 's/<string>app</<string>artnet2atem</g' ${OUTPUT_DIR}/mac64/app-darwin-x64/app/artnet2atem.app/Contents/Info.plist
-
+	rm -rf ${OUTPUT_DIR}/mac64/app-darwin-x64/app/artnet2atem.app/Contents/Resources/app/build
 	#hdiutil create -volname artnet2atem -srcfolder ${OUTPUT_DIR}/mac64/app-darwin-x64/app -ov -format UDZO ${OUTPUT_DIR}/mac64/app-darwin-x64/artnet2atem.dmg
 
 linux:
