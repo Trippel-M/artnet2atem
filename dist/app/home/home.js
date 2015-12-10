@@ -68,6 +68,31 @@
 
       }
     ]
+  )
+
+  .directive(
+    'foobar',
+    [
+      function() {
+
+        return {
+          restrict: 'A',
+          link: function (scope, elem, attrs) {
+            elem.bind(
+              'click',
+
+              function () {
+								var ipcRenderer = require('electron').ipcRenderer;
+                ipcRenderer.send('foobar', { ai: "aouch" });
+              }
+
+            );
+          }
+        };
+
+      }
+    ]
   );
+
 
 })();
