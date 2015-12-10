@@ -19,6 +19,9 @@ var artnetcounter = {};
 
 					$("#artnetcounter").html(dom);
 				});
+				system.on("atem_state", function(state) {
+					$("#atemconnected").html(state);
+				});
 
 				system.on("pgm_input", function(inx) {
 					$("#atem_pgm").html(inx);
@@ -31,7 +34,7 @@ var artnetcounter = {};
 				system.on("aux2_input",function(inx) {
 					$("#atem_aux2").html(inx);
 				});
-				
+
 				system.on("aux3_input",function(inx) {
 					$("#atem_aux3").html(inx);
 				});

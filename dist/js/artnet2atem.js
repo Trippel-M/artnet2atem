@@ -14,7 +14,8 @@
 	var lastOut3 = 0;
 	var lastOut4 = 0;
 
-	system.emit("atem_connected",false);
+//	system.emit("atem_connected",false);
+	system.emit("atem_state","connecting");
 
 	var atemIP;
 	var dmxChannel;
@@ -40,7 +41,8 @@
 	system.emit("config_updated");
 
 	atem.on('connect', function() {
-		system.emit("atem_connected",true);
+		system.emit("atem_state","connected");
+//		system.emit("atem_connected",true);
 		connected = 1;
 	});
 	console.log("listening");
@@ -112,6 +114,8 @@
 			system.emit("aux1_input", state.video.auxs[0]);
 			system.emit("aux2_input", state.video.auxs[1]);
 			system.emit("aux3_input", state.video.auxs[2]);
+			system.emit("atem_state","connected");
+
 	});
 
 
