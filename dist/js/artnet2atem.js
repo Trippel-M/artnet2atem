@@ -25,7 +25,7 @@
 
 	system.on('get_atem_state', function () {
 			setImmediate(function () {
-				system.emit('atem_state', connected);
+				system.emit('atem_state', connected ? 'Connected' : 'Disconnected');
 			});
 	});
 
