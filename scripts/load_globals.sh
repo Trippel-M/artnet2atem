@@ -1,4 +1,13 @@
-DEPENDENCIES=( "electron-prebuilt:electron" "electron-packager:electron-packager" "node-inspector:node-inspector" "bower:bower" "jspm:jspm" "gulp:gulp" "jest-cli:jest" )
+DEPENDENCIES=(
+  "electron-prebuilt:electron"
+  "electron-packager:electron-packager"
+  "node-inspector:node-inspector"
+  "bower:bower"
+  "jspm:jspm"
+  "gulp:gulp"
+  "jest-cli:jest"
+)
+
 for DEP in ${DEPENDENCIES[@]}; do
   PKG="${DEP%%:*}"
   CMD="${DEP##*:}"
