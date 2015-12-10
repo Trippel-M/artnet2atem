@@ -30,10 +30,14 @@
 							$scope.saved = true;
 							$scope.$apply();
 
+							system.emit("config_updated");
+
+
 							setTimeout(function () {
 								$scope.saved = false;
 								$scope.$apply();
-							}, 1000);
+								window.location.href = "#/";
+							}, 100);
 						}
 					});
 				};

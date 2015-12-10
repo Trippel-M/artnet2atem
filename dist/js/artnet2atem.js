@@ -1,24 +1,10 @@
-//"use strict";
-//window.jQuery = window.$;
+(function(){
 
-(function () {
-
-	/*
-		Artnet to ATEM daemon
-
-		Author:
-			Trippel-M levende bilder AS
-			William Viker
-			william@trippelm.no
-
-	*/
 
 	var debug					= require("debug")("main");
 	var ATEM					= require('applest-atem');
 	var atem					= new ATEM();
-	var artnetsrv			= require('artnet-node/lib/artnet_server.js');
-	var EventEmitter	= require("events").EventEmitter;
-	var system				= new EventEmitter();
+	var artnetsrv     = require("artnet-node");
 
 	var connected = 0;
 
@@ -26,75 +12,78 @@
 	var lastOut2 = 0;
 	var lastOut3 = 0;
 
-	atemIP				= "2.0.0.3";
-	dmxChannel		= 1;
-	dmxUniverse		= 10;
-	dmxPhysical		= 1;
+	system.emit("atem_connected",false);
 
-	dmxChannel--; //h4x
+	var atemIP;
+	var dmxChannel;
+	var dmxUniverse;
 
-	debug("atemConnect", "Connecting to ATEM");
 
-	atem.connect(atemIP);
+	system.on("config_updated", function() {
+		var configx	= require('config');
+		atemIP				= configx.atem_ip;
+		dmxChannel		= configx.artnet_start;
+		dmxChannel--;
+		dmxUniverse		= configx.artnet_uni;
+		atem.connect(atemIP, 9910);
+
+	});
+	system.emit("config_updated");
 
 	atem.on('connect', function() {
-		debug("atemConnect", "ATEM Connected");
+		system.emit("atem_connected",true);
 		connected = 1;
 	});
+	console.log("listening");
 
-	var srv = artnetsrv.listen(6454, function(msg, peer) {
-		system.emit("artnet",msg);
+	var srv = artnetsrv.Server.listen(6454, function(err, msg, peer) {
 
-		if (debugArtnet) {
-			debug("ArtNet", "Sequence "+msg.sequence+" Universe "+msg.universe+" Length "+msg.length);
+		if (msg.type != 'ArtOutput') {
+			// not artnet
 		}
 
-		// First channel - PGM switching
-		if (msg.universe == dmxUniverse && connected) {
-			if (lastOut1 != msg.data[0]) {
-				lastOut1 = msg.data[dmxChannel+0];
-				atem.changeProgramInput(msg.data[dmxChannel+0]);
-				debug("ATEM","Changing PGM out to input "+msg.data[dmxChannel+0]);
-				//atem.changePreviewInput(msg.data[dmxChannel+0]);
-				//atem.autoTransition();
+		else {
+
+			system.emit("artnet",msg);
+
+			// First channel - PGM switching
+			if (msg.universe == dmxUniverse) {
+				if (lastOut1 != msg.data[0]) {
+					lastOut1 = msg.data[dmxChannel+0];
+					if (connected) atem.changeProgramInput(msg.data[dmxChannel+0]);
+					system.emit("pgm_input",msg.data[dmxChannel+0]);
+					console.log("ATEM","Changing PGM out to input "+msg.data[dmxChannel+0]);
+					//atem.changePreviewInput(msg.data[dmxChannel+0]);
+					//atem.autoTransition();
+				}
 			}
-		}
 
-		// AUX1 switching
-		if (msg.universe == dmxUniverse && connected) {
-			if (lastOut2 != msg.data[dmxChannel+1]) {
-				lastOut2 = msg.data[dmxChannel+1];
-				debug("ATEM","Changing AUX 1 to input "+ msg.data[dmxChannel+1]);
-				atem.changeAuxInput(1,msg.data[dmxChannel+1]);
+			// AUX1 switching
+			if (msg.universe == dmxUniverse) {
+				if (lastOut2 != msg.data[dmxChannel+1]) {
+					lastOut2 = msg.data[dmxChannel+1];
+					console.log("ATEM","Changing AUX 1 to input "+ msg.data[dmxChannel+1]);
+					system.emit("aux1_input",msg.data[dmxChannel+1]);
+					if (connected) atem.changeAuxInput(1,msg.data[dmxChannel+1]);
+				}
 			}
-		}
 
-		// AUX2 switching
-		if (msg.universe == dmxUniverse && connected) {
-			if (lastOut3 != msg.data[dmxChannel+2]) {
-				lastOut3 = msg.data[dmxChannel+2];
-				debug("ATEM","Changing AUX 2 to input "+ msg.data[dmxChannel+2]);
-				atem.changeAuxInput(2,msg.data[dmxChannel+2]);
+			// AUX2 switching
+			if (msg.universe == dmxUniverse) {
+				if (lastOut3 != msg.data[dmxChannel+2]) {
+					lastOut3 = msg.data[dmxChannel+2];
+					console.log("ATEM","Changing AUX 2 to input "+ msg.data[dmxChannel+2]);
+					system.emit("aux2_input",msg.data[dmxChannel+2]);
+					if (connected) atem.changeAuxInput(2,msg.data[dmxChannel+2]);
+				}
 			}
-		}
 
+		}
 	});
 
 	atem.on('stateChanged', function(err, state) {
 		var connected = 0;
 	});
 
-	io.on('connection', function(socket){
 
-		system.on("artnet",function(data) {
-			socket.emit("artnet",data);
-		});
-
-		socket.on('disconnect', function(){
-			debug("socket","disconnection");
-		});
-
-	});
-
-
-});
+})();

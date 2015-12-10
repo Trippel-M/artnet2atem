@@ -1,15 +1,30 @@
 
-<div class="panel panel-default">
+<div class="panel panel-red">
 	<div class="panel-heading">
-		Oversikt
+		ArtNet Activity
 	</div>
-	<div class="panel-body" ng-hide="saved">
-		<div class="row">
-			<div class="col-lg-6">
-					ATEM status: <i class="fa text-success" ng-class="{ 'fa-circle': statusOK, 'fa-circle-o': !statusOK }"></i>
-					<br />
-					<input type="checkbox" ng-model="statusOK"> Test
-			</div>
-		</div>
+	<div class="panel-body">
+		Recieved packets <span id="artnetcounter">0</span>
+	</div>
+</div>
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		ATEM Status
+	</div>
+	<div class="panel-body">
+		<span id="atemconnected">Disconnected</span>
+		<table class="table">
+			<tr>
+				<th>PGM</th>
+				<th>AUX1</th>
+				<th>AUX2</th>
+			</tr>
+			<tr>
+				<td id="atem_pgm">?</td>
+				<td id="atem_aux1">?</td>
+				<td id="atem_aux2">?</td>
+			</tr>
+		</table>
 	</div>
 </div>

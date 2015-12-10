@@ -13,6 +13,7 @@ var externalWindow;
 app.commandLine.appendSwitch('remote-debugging-port', '8315');
 app.commandLine.appendSwitch('host-rules', 'MAP * 127.0.0.1');
 
+
 require('crash-reporter').start();
 
 var mainWindow = null;
@@ -45,15 +46,9 @@ ipcMain.on('quit', function (event, args) {
     app.quit();
 });
 
-ipcMain.on("foobar", function (evnet, args) {
-    console.log("foobar",args);
-});
-
 ipcMain.on('screen', function(event, args) {
   var electronScreen = electron.screen;
   var displays = electronScreen.getAllDisplays();
-
-  console.log(args);
 
   if (args.command == 'close') {
 

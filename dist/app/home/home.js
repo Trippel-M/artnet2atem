@@ -1,6 +1,5 @@
 (function() {
   'use strict';
-	var menu = require(__dirname + '/../menu.js');
 
   angular.module('Home', ['ngRoute']).
 
@@ -8,7 +7,6 @@
     [
       '$rootScope', function($rootScope) {
 
-			$rootScope.menu = menu;
 			$rootScope.path = '#/';
 
 			$rootScope.$on(
@@ -35,7 +33,7 @@
                 'click',
 
                 function () {
-                  $window.history.back();
+                  $window.location.href = "#/";
                 }
 
               );
@@ -60,30 +58,6 @@
               function () {
 								var ipcRenderer = require('electron').ipcRenderer;
                 ipcRenderer.send('quit', {});
-              }
-
-            );
-          }
-        };
-
-      }
-    ]
-  )
-
-  .directive(
-    'foobar',
-    [
-      function() {
-
-        return {
-          restrict: 'A',
-          link: function (scope, elem, attrs) {
-            elem.bind(
-              'click',
-
-              function () {
-								var ipcRenderer = require('electron').ipcRenderer;
-                ipcRenderer.send('foobar', { ai: "aouch" });
               }
 
             );
