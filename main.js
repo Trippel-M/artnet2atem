@@ -39,11 +39,13 @@ app.on('window-all-closed', function() {
 });
 
 ipcMain.on('minimize', function (event, args) {
-    app.minimize();
+  if (mainWindow) {
+    mainWindow.minimize();
+  }
 });
 
 ipcMain.on('quit', function (event, args) {
-    app.quit();
+  app.quit();
 });
 
 ipcMain.on('screen', function(event, args) {

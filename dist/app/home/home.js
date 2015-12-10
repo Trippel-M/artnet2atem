@@ -45,6 +45,30 @@
   )
 
 	.directive(
+    'minimize',
+    [
+      function() {
+
+        return {
+          restrict: 'A',
+          link: function (scope, elem, attrs) {
+            elem.bind(
+              'click',
+
+              function () {
+								var ipcRenderer = require('electron').ipcRenderer;
+                ipcRenderer.send('minimize', {});
+              }
+
+            );
+          }
+        };
+
+      }
+    ]
+  )
+
+	.directive(
     'quit',
     [
       function() {
