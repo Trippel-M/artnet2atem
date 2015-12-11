@@ -10,10 +10,10 @@ clean-apps:
 	rm -rf ${OUTPUT_DIR} && mkdir ${OUTPUT_DIR}
 windows:
 	rm -rf ${OUTPUT_DIR}/win32
-	electron-packager . ${APP_NAME} --platform=win32 --arch=ia32 --ignore="/build/" --ignore "node_modules/(karma|babel|gulp-sass|jest-cli|gulp-istanbul|babel-jest|phantomjs|karma-coverage|electron-packager|gulp-autoprefixer|gulp-notify|wiredep|gulp|gulp-clean|gulp-util|del|gulp-load-plugins|gulp-sourcemaps|jasmine-core)" --version=${ELECTRON_VERSION} --out=${OUTPUT_DIR}/win32
+	electron-packager . ${APP_NAME} --platform=win32 --arch=ia32 --icon=${OUTPUT_DIR}/../tpmlogo.ico --ignore="/build/" --ignore "node_modules/(karma|babel|gulp-sass|jest-cli|gulp-istanbul|babel-jest|phantomjs|karma-coverage|electron-packager|gulp-autoprefixer|gulp-notify|wiredep|gulp|gulp-clean|gulp-util|del|gulp-load-plugins|gulp-sourcemaps|jasmine-core)" --version=${ELECTRON_VERSION} --out=${OUTPUT_DIR}/win32
 windows-64:
 	rm -rf ${OUTPUT_DIR}/win64
-	electron-packager . ${APP_NAME} --platform=win32 --arch=x64 --ignore="/build/" --ignore "node_modules/(karma|babel|gulp-sass|jest-cli|gulp-istanbul|babel-jest|phantomjs|karma-coverage|electron-packager|gulp-autoprefixer|gulp-notify|wiredep|gulp|gulp-clean|gulp-util|del|gulp-load-plugins|gulp-sourcemaps|jasmine-core)" --version=${ELECTRON_VERSION} --out=${OUTPUT_DIR}/win64
+	electron-packager . ${APP_NAME} --platform=win32 --arch=x64 --icon=${OUTPUT_DIR}/../tpmlogo.ico --ignore="/build/" --ignore "node_modules/(karma|babel|gulp-sass|jest-cli|gulp-istanbul|babel-jest|phantomjs|karma-coverage|electron-packager|gulp-autoprefixer|gulp-notify|wiredep|gulp|gulp-clean|gulp-util|del|gulp-load-plugins|gulp-sourcemaps|jasmine-core)" --version=${ELECTRON_VERSION} --out=${OUTPUT_DIR}/win64
 mac-64:
 	rm -rf ${OUTPUT_DIR}/mac64
 	electron-packager . ${APP_NAME} --platform=darwin --arch=x64 --ignore="/build/" --app-bundle-id=${MAC_BUNDLE_ID} --version=${ELECTRON_VERSION} --out=${OUTPUT_DIR}/mac64 --icon=${OUTPUT_DIR}/../tpmlogo.icns	--ignore "/node_modules/(karma|babel|gulp-sass|jest-cli|gulp-istanbul|babel-jest|phantomjs|karma-coverage|electron-packager|gulp-autoprefixer|gulp-notify|wiredep|gulp|gulp-clean|gulp-util|del|gulp-load-plugins|gulp-sourcemaps|jasmine-core)"
