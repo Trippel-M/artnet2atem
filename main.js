@@ -9,10 +9,10 @@ var path = require('path');
 var BrowserWindow = require('browser-window');
 var externalWindow;
 
-
+/*
 app.commandLine.appendSwitch('remote-debugging-port', '8315');
 app.commandLine.appendSwitch('host-rules', 'MAP * 127.0.0.1');
-
+*/
 
 require('crash-reporter').start();
 
