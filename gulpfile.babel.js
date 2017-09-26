@@ -40,12 +40,12 @@ gulp.task('build-sass', () => {
   return gulp.src(sassRoot+'/*.scss')
     .pipe(plugins.plumber())
     .pipe(plugins.notify('Compile Sass File: <%= file.relative %>...'))
-    .pipe(plugins.sourcemaps.init())
+//    .pipe(plugins.sourcemaps.init())
     .pipe(plugins.autoprefixer('last 10 versions'))
     .pipe(plugins.sass({
       style: 'compressed'
     })).on('error', handleError)
-    .pipe(plugins.sourcemaps.write())
+//    .pipe(plugins.sourcemaps.write())
     .pipe(gulp.dest(cssRoot));
 });
 

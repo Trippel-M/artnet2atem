@@ -4,17 +4,15 @@ const electron = require('electron');
 const ipcMain = require('electron').ipcMain;
 
 var _ = require('lodash');
-var app = require('app');
+var app = electron.app;
 var path = require('path');
-var BrowserWindow = require('browser-window');
+var BrowserWindow = electron.BrowserWindow;
 var externalWindow;
 
 /*
 app.commandLine.appendSwitch('remote-debugging-port', '8315');
 app.commandLine.appendSwitch('host-rules', 'MAP * 127.0.0.1');
 */
-
-require('crash-reporter').start();
 
 var mainWindow = null;
 
@@ -88,7 +86,7 @@ app.on('ready', function() {
 
   mainWindow.loadURL(path.join('file://', __dirname, options.views_dir, options.root_view));
 
-  //if(options.debug) { mainWindow.openDevTools(); }
+  //if(1||options.debug) { mainWindow.openDevTools(); }
 
   mainWindow.on('closed', function() { mainWindow = null; });
 

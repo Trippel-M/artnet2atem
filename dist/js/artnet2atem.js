@@ -130,7 +130,7 @@
 	};
 
 	atem.on('stateChanged', function(err, state) {
-			system.emit("pgm_input", state.video.programInput);
+			system.emit("pgm_input", state.video.ME[0].programInput);
 			system.emit("aux1_input", state.video.auxs[0]);
 			system.emit("aux2_input", state.video.auxs[1]);
 			system.emit("aux3_input", state.video.auxs[2]);

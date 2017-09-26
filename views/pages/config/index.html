@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    Konfigurasjon
+    Configuration
   </div>
   <div class="panel-body" ng-hide="saved">
     <div class="row">
@@ -19,27 +19,27 @@
             <div class="form-group">
               <label>ArtNet IP</label>
               <input class="form-control" placeholder="0.0.0.0" ng-model="config.our_ip">
-              <p class="help-block">Lokal IP som ArtNet skal lytte etter data på</p>
+              <p class="help-block">Art-Net interface IP</p>
             </div>
 
             <div class="form-group">
-              <label>ArtNet-univers</label>
+              <label>ArtNet-universe</label>
               <input class="form-control" placeholder="1" ng-model="config.artnet_uni" required>
-              <p class="help-block">Universnummer for ArtNet</p>
+              <p class="help-block">Universe id for ArtNet</p>
             </div>
 
             <div class="form-group">
-              <label>ArtNet-kanal</label>
+              <label>ArtNet-channel</label>
               <input class="form-control" placeholder="0" ng-model="config.artnet_start" required>
-              <p class="help-block">Kanalnummer for ATEM styring</p>
+              <p class="help-block">DMX Channel number for ATEM control (first channel is pgm, next is aux1, etc)</p>
             </div>
 
             <div class="form-group">
                 <button class="btn btn-default" back>
-                  <i class="fa fa-arrow-left"></i> Tilbake
+                  <i class="fa fa-arrow-left"></i> Back
                 </button>
                 <button class="btn btn-success" type="submit" ng-show="configform.$valid">
-                  <i class="fa fa-save"></i> Lagre
+                  <i class="fa fa-save"></i> Save
                 </button>
             </div>
 
