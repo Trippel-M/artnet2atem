@@ -14,10 +14,10 @@
 	/* Har den her så den teller uavhengig av om siden står oppe */
 	system.on("artnet", function (msg) {
 
-			if (artnetcounter['universe'+msg.universe] == undefined) {
-				artnetcounter['universe'+msg.universe] = 1;
+			if (artnetcounter['Universe '+msg.universe] == undefined) {
+				artnetcounter['Universe '+msg.universe] = 1;
 			} else {
-				artnetcounter['universe'+msg.universe]++;
+				artnetcounter['Universe '+msg.universe]++;
 			}
 
 	});
@@ -45,30 +45,30 @@
 				system.emit('get_atem_state');
 
 				var pgm_input;
-				system.on("pgm_input", pgm_input = function(inx) {
+				system.on("pgm_input", pgm_input = function(inx, name) {
 						$scope.$apply(function () {
-							$scope.atemio['PGM'] = inx;
+							$scope.atemio['PGM'] = name;
 						});
 				});
 
 				var aux1_input;
-				system.on("aux1_input", aux1_input = function(inx) {
+				system.on("aux1_input", aux1_input = function(inx, name) {
 						$scope.$apply(function () {
-							$scope.atemio['AUX1'] = inx;
+							$scope.atemio['AUX1'] = name;
 						});
 				});
 
 				var aux2_input;
-				system.on("aux2_input", aux2_input = function(inx) {
+				system.on("aux2_input", aux2_input = function(inx, name) {
 						$scope.$apply(function () {
-							$scope.atemio['AUX2'] = inx;
+							$scope.atemio['AUX2'] = name;
 						});
 				});
 
 				var aux3_input;
-				system.on("aux3_input", aux3_input = function(inx) {
+				system.on("aux3_input", aux3_input = function(inx, name) {
 						$scope.$apply(function () {
-							$scope.atemio['AUX3'] = inx;
+							$scope.atemio['AUX3'] = name;
 						});
 				});
 

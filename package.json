@@ -1,6 +1,6 @@
 {
   "name": "artnet2atem",
-  "version": "1.5.0",
+  "version": "0.0.3",
   "description": "Electron artnet2atem",
   "engines": {
     "node": "<0.12"
